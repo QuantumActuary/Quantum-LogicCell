@@ -41,16 +41,15 @@ extern "C" LOGICCELL_API void registerPlugin(Quantum::Kernel &kernel)
 
     for(cell_ptr c: cells_to_add)
     {
-        c->declare_params();
-        c->declare_io();
         c->init();
-        kernel.getCellRegistry().addCell(c, c->name());
+        kernel.getCellRegistry().addCell(c, c->metadata["name"]->get<std::string>());
     }
     //setup gtest parameters
+    /*
     int argc = 2;
     char file[] = "dummy.dylib"; //this doesn't do anything
     char arg[] = "--gtest_color=true";
     char* option[2] = {file, arg};
     ::testing::InitGoogleTest(&argc, option);
-    RUN_ALL_TESTS();
+    */
 }
